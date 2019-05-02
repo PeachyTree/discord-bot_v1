@@ -1,9 +1,8 @@
 # About
-This is some code of my very first bot..
+This is some code of my very first bot
 It has some useful commands so I thought of sharing this here too, it may become outdated with time though.
 
 ## Features
-- Running code on bot start
 - Deleting certain messages in a specific server function
 - Baning words from your server function
 - Adding a role if a user joins feature
