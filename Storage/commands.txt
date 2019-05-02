@@ -1,4 +1,0 @@
-Commands:
-
-First Command - description
-Second Command - description
