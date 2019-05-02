@@ -1,8 +1,8 @@
 //Calling the Package
-var Discord = require("discord.js");
+var Discord = require('discord.js');
 var bot = new Discord.Client();
-var fs = require("fs"); // First, we need to require fs, it is packaged with node.js so no need to download it 
-var profanities = require("profanities"); // `npm i profanities`
+var fs = require("fs"); // We need to require fs (No need to install it since it's already in node)
+var profanities = require('profanities'); // `npm i profanities`
 
 var userData = JSON.parse(fs.readFileSync("Storage/userData.json", "utf8"));
 var commandsList = fs.readFileSync("Storage/commands.txt", "utf8"); 
@@ -153,5 +153,4 @@ bot.on("guildMemberRemove", member => {
 });
 
 // Login 
-    bot.login("TOKEN") 
-// Don't let people see this code, people can control your bot, including the server your bot has admin on.
+bot.login(process.env.TOKEN) 
