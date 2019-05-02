@@ -12,4 +12,3 @@ It has some useful commands so I thought of sharing this here too, it may become
 - Userinfo command
 - Profanity filter
 - Counting messages in each guild function
-- Command Handler
