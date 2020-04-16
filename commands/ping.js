@@ -1,7 +1,4 @@
 module.exports.run = async (bot, message, args) => { 
-
-    //Ping / Pong command
- 
     
         message.channel.send({embed:{ 
             title:"Ping!",
