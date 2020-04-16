@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Azura Apple. All rights reserved. MIT license.
+
 module.exports.run = async (bot, message, args) => { 
 
     var fs = require("fs"); 
