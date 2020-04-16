@@ -1,13 +1,17 @@
-//Calling the Package
-var Discord = require('discord.js');
-var bot = new Discord.Client();
-var fs = require("fs"); // We need to require fs (No need to install it since it's already in node)
-var profanities = require('profanities'); // `npm i profanities`
+// Copyright (c) 2020 Azura Apple. All rights reserved. MIT license.
 
+// Packages:
+const Discord = require('discord.js'); // `npm i discord.js`
+const client = new Discord.Client(); // This is your client, it can also be called bot or whatever you want to call it.
+const fs = require("fs"); // No need to install this package since it's already included within node.
+const profanities = require('profanities'); // `npm i profanities`
+
+// Read & Get the Commands from the commands.txt File
 var userData = JSON.parse(fs.readFileSync("Storage/userData.json", "utf8"));
 var commandsList = fs.readFileSync("Storage/commands.txt", "utf8"); 
-bot.commands = new Discord.Collection(); 
+client.commands = new Discord.Collection(); 
 
+// Load Commands Function
 function loadCmds () {
     fs.readdir("./commands/", (err, files) => { 
         if(err) console.error(err); 
@@ -28,19 +32,18 @@ function loadCmds () {
 
 }
 
+// Get User Info Function
 function userInfo(user, guild) {
     var finalString = ""; 
 
-    // Name
+    // Get the Username + ID
     finalString += "**" + user.username + "**, with the **ID** of **" + user.id + "**"; 
     
     var userCreated = user.createdAt.toString().split(" "); 
     finalString += ", was **created on " + userCreated[1] + ", " + userCreated[2] + " " + userCreated[3] + "**."
 
-    // Message Sent
+    // Send the message.
     finalString += " Since then, they have **sent " + userData[user.id + guild.id].messagesSent + "messages** to this discord."
-
-    
 
     return finalString; 
 }
@@ -74,7 +77,7 @@ bot.on("message", message => {
         loadCmds()
     }
 
-    // Profanity
+    // Profanity Filter
     for (x = 0; x < profanities.length; x++) { 
         if (message.content.toUpperCase() == profanities[x].toUpperCase()) {
             message.channel.send("Hey! Don't say that!") 
@@ -120,14 +123,15 @@ bot.on("ready", () => {
 
     // You can put any code you want here, it will run when you turn on your bot.
 
-   // status
-   bot.user.setStatus("Online") // It can be "Online", "Idle", "Invisible", or "dnd".
-
-   // game & watching 
-   bot.user.setActivity("Hello!", {type: "PLAYING"}); 
+       // status
+       bot.user.setStatus("Online") // It can be "Online", "Idle", "Invisible", or "dnd".
     
-   // To set watching, add another option like this:
-   bot.user.setActivity("Hello!", {type: "WATCHING"}); // You can change the string to whatever you want.
+       // Valid Activity types are:
+       // Playing / Streaming / Watching
+       bot.user.setActivity("Hello!", {type: "PLAYING"}); 
+
+       // To set watching, add another option like this:
+       bot.user.setActivity("Hello!", {type: "WATCHING"}); // You can change the string to whatever you want.
 
 });
 
@@ -141,7 +145,6 @@ bot.on("guildMemberAdd", member => {
     member.addRole(role)
 
     member.guild.channels.get("534399455995101184").send("** " + member.user.username + "**, has joined the server!"); 
-
 
 });
 
